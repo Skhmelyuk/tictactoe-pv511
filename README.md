@@ -1,35 +1,106 @@
-# React + TypeScript + Vite
+# 🎮 Гра «Хрестики-нулики» (Tic-Tac-Toe)
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Сучасний інтерактивний веб-застосунок класичної гри «Хрестики-нулики», реалізований на базі **React 19**, **TypeScript** та **Vite**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 📖 Опис проєкту
 
-## React Compiler
+Проєкт є повноцінною клієнтською SPA (Single Page Application) грою для двох гравців за одним екраном. 
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+Гра моделює класичне ігрове поле 3×3, де гравці по черзі роблять ходи символами **X** (Хрестик) та **O** (Нулик). Застосунок автоматично контролює чергу ходів, валідує клітинки (запобігає повторним клікам по зайнятих полях), обчислює наявність виграшної комбінації серед 8 можливих ліній (по горизонталі, вертикалі чи діагоналі), фіксує нічию та дозволяє в будь-який момент скинути ігровий процес для нової партії.
 
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
+### Ключові можливості:
+- 🎯 **Інтуїтивне ігрове поле**: інтерактивна сітка 3×3 на CSS Grid із візуальними ефектами наведення та плавними переходами.
+- 👥 **Гра для двох гравців**: почерговий поділ ходів між гравцями `X` та `O`.
+- 🧠 **Алгоритм перевірки переможця**: моментальний розрахунок переможця або нічиєї після кожного ходу на основі виграшних ліній.
+- 🛡️ **Захист від некоректних дій**: блокування натискань на вже зайняті клітинки або після завершення гри.
+- 🔄 **Перезапуск гри**: скидання стану поля в один клік без перезавантаження сторінки.
+- 🧩 **Модульна архітектура**: розбиття інтерфейсу на незалежні компоненти (`Board`, `Cell`, `Turn`, `Button`).
 
-## Expanding the Oxlint configuration
+---
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## 🎯 Для кого цей проєкт
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+Проєкт має подвійне призначення — як навчально-практичне, так і користувацьке:
+
+1. **Для студентів та frontend-розробників початківців**:
+   - Слугує наочним прикладом розробки застосунку на сучасному стеку **React 19 + TypeScript**.
+   - Демонструє фундаментальні концепції React:
+     - Декларативний підхід до побудови UI.
+     - Керування локальним станом за допомогою хука `useState`.
+     - Підйом стану (State Lifting) від дочірніх компонентів (`Cell`, `Board`) до кореневого (`App`).
+     - Односпрямований потік даних (props down, events up).
+     - Розділення логіки (чисті функції валідації переможця в `utils`) та представлення (компоненти в `components`).
+   - Показує сувору типізацію TypeScript (типи гравців, стану дошки, результату гри).
+
+2. **Для викладачів та менторів**:
+   - Зручна база для практичних занять, кодекс-рев'ю та демонстрації архітектурних патернів у компонентно-орієнтованій розробці.
+   - Готовий майданчик для розширення функціоналу студентами (наприклад, додавання підсвічування виграшної лінії, таймера, історії ходів, гри проти бота/ШІ або збереження рахунку).
+
+3. **Для кінцевих користувачів**:
+   - Проста, швидка та невибаглива до ресурсів міні-гра для приємного проведення часу удвох за одним комп'ютером чи мобільним пристроєм.
+
+---
+
+## 🛠️ Технологічний стек
+
+- **Фреймворк**: [React 19](https://react.dev/)
+- **Мова програмування**: [TypeScript](https://www.typescriptlang.org/)
+- **Збирач та dev-сервер**: [Vite 8](https://vite.dev/)
+- **Оптимізація та лінтинг**: [React Compiler](https://react.dev/learn/react-compiler), [Oxlint](https://oxc.rs/)
+- **Стилізація**: Сучасний семантичний CSS3 (CSS Grid, Flexbox, градієнти, CSS-анімації)
+
+---
+
+## 📂 Структура проєкту
+
+```text
+tictactoe/
+├── src/
+│   ├── components/       # UI-компоненти застосунку
+│   │   ├── Board.tsx     # Ігрова дошка (сітка 3×3)
+│   │   ├── Cell.tsx      # Окрема клітинка дошки
+│   │   ├── Turn.tsx      # Індикатор поточного ходу / статусу
+│   │   └── Button.tsx    # Кнопка скидання гри
+│   ├── types/            # Описи типів та інтерфейсів TypeScript
+│   │   └── index.tsx     # Player, CellValue, BoardState, WinResult
+│   ├── utils/            # Допоміжні утиліти та бізнес-логіка
+│   │   └── index.tsx     # Алгоритм checkWinner та константи ліній
+│   ├── App.tsx           # Головний компонент: стан гри та обробники
+│   ├── index.css         # Стилі інтерфейсу
+│   └── main.tsx          # Точка входу застосунку
+├── package.json          # Залежності та npm-скрипти
+├── tsconfig.json         # Конфігурація TypeScript
+└── vite.config.ts        # Конфігурація Vite
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+---
+
+## 🚀 Встановлення та запуск
+
+1. **Клонуйте репозиторій або перейдіть до директорії проєкту**:
+   ```bash
+   cd tictactoe
+   ```
+
+2. **Встановіть залежності**:
+   ```bash
+   npm install
+   ```
+
+3. **Запустіть локальний сервер для розробки**:
+   ```bash
+   npm run dev
+   ```
+   Після запуску відкрийте посилання у браузері (за замовчуванням `http://localhost:5173`).
+
+4. **Збірка для продакшну**:
+   ```bash
+   npm run build
+   ```
+
+5. **Перевірка лінтером**:
+   ```bash
+   npm run lint
+   ```
