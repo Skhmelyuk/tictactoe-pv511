@@ -133,3 +133,22 @@ h1 {
     box-shadow: 0 0 0 0 rgba(46, 204, 113, 0);
   }
 }
+
+
+/* Стилізація блоку таймера */
+.timer {
+  margin-bottom: 14px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.timer span {
+  font-family: monospace;
+  font-size: 1.2rem;
+  color: #0f172a;
+  background-color: #e2e8f0;
+  padding: 3px 10px;
+  border-radius: 6px;
+  margin-left: 6px;
+}
