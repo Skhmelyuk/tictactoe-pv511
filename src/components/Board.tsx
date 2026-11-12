@@ -1,5 +1,6 @@
 import type { BoardState } from "../types";
 import { Cell } from "./Cell";
+import styles from "./Board.module.css";
 
 interface BoardProps {
   board: BoardState;
@@ -9,7 +10,7 @@ interface BoardProps {
 
 export function Board({ board, cellClick, winningLine }: BoardProps) {
   return (
-    <div className="board">
+    <div className={styles.board}>
       {board.map((cell, index) => (
         <Cell
           key={index}

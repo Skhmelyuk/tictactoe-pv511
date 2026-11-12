@@ -1,4 +1,5 @@
 import type { CellValue, Player } from "../types";
+import styles from "./Turn.module.css";
 
 interface TurnProps {
   winner: CellValue;
@@ -7,12 +8,11 @@ interface TurnProps {
 }
 
 export function Turn({ winner, isDraw, currentPlayer }: TurnProps) {
-  // 1. Якщо є переможець
   if (winner) {
     return (
-      <div className="turn">
+      <div className={styles.turn}>
         Гравець{" "}
-        <span className={winner === "X" ? "x-mark" : "o-mark"}>
+        <span className={winner === "X" ? styles.xMark : styles.oMark}>
           {winner}
         </span>{" "}
         переміг! 🏆
@@ -20,16 +20,14 @@ export function Turn({ winner, isDraw, currentPlayer }: TurnProps) {
     );
   }
 
-  // 2. Якщо нічия
   if (isDraw) {
-    return <div className="turn">🤝 Нічия! Спробуйте ще раз.</div>;
+    return <div className={styles.turn}>🤝 Нічия! Спробуйте ще раз.</div>;
   }
 
-  // 3. Якщо гра триває
   return (
-    <div className="turn">
+    <div className={styles.turn}>
       Хід гравця:{" "}
-      <span className={currentPlayer === "X" ? "x-mark" : "o-mark"}>
+      <span className={currentPlayer === "X" ? styles.xMark : styles.oMark}>
         {currentPlayer}
       </span>
     </div>

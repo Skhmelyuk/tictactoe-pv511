@@ -4,6 +4,7 @@ import { Button } from "./components/Button";
 import { Turn } from "./components/Turn";
 import type { BoardState, Player } from "./types";
 import { checkWinner } from "./utils";
+import styles from "./App.module.css";
 
 function App() {
   const [board, setBoard] = useState<BoardState>(Array(9).fill(null));
@@ -58,12 +59,12 @@ function App() {
   };
 
   return (
-    <div className="game">
-      <h1 className="title">Гра хрестики-нулики</h1>
+    <div className={styles.game}>
+      <h1 className={styles.title}>Гра хрестики-нулики</h1>
 
       {/* Таймер партії */}
-      <div className="timer">
-        ⏱️ Час партії: <span>{formatTime(seconds)}</span>
+      <div className={styles.timer}>
+        ⏱️ Час партії: <span className={styles.timerBadge}>{formatTime(seconds)}</span>
       </div>
 
       {/* Динамічний статус ходу / перемоги */}

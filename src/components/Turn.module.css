@@ -1,0 +1,29 @@
+.turn {
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+  color: #34495e;
+  padding: 10px 20px;
+  background-color: #fff;
+  border-radius: 30px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  font-weight: 500;
+  transition: transform 0.3s ease;
+}
+
+.turn:hover {
+  transform: translateY(-2px);
+}
+
+.xMark {
+  color: #e74c3c;
+  font-weight: 700;
+  text-shadow: 1px 1px 2px rgba(231, 76, 60, 0.2);
+}
+
+.oMark {
+  color: #007bff;
+  font-weight: 700;
+  text-shadow: 1px 1px 2px rgba(0, 123, 255, 0.2);
+}
+
