@@ -1,9 +1,43 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, type CSSProperties } from "react";
 import { Board } from "./components/Board";
 import { Button } from "./components/Button";
 import { Turn } from "./components/Turn";
 import type { BoardState, Player } from "./types";
 import { checkWinner } from "./utils";
+
+const gameContainerStyle: CSSProperties = {
+  textAlign: "center",
+};
+
+const titleStyle: CSSProperties = {
+  color: "#2c3e50",
+  marginBottom: "20px",
+  fontSize: "2.5rem",
+  textTransform: "uppercase",
+  letterSpacing: "2px",
+  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.1)",
+  background: "linear-gradient(45deg, #2c3e50, #3498db)",
+  WebkitBackgroundClip: "text",
+  WebkitTextFillColor: "transparent",
+  paddingBottom: "10px",
+};
+
+const timerStyle: CSSProperties = {
+  marginBottom: "14px",
+  fontSize: "1.1rem",
+  fontWeight: 600,
+  color: "#475569",
+};
+
+const timerBadgeStyle: CSSProperties = {
+  fontFamily: "monospace",
+  fontSize: "1.2rem",
+  color: "#0f172a",
+  backgroundColor: "#e2e8f0",
+  padding: "3px 10px",
+  borderRadius: "6px",
+  marginLeft: "6px",
+};
 
 function App() {
   const [board, setBoard] = useState<BoardState>(Array(9).fill(null));
@@ -58,12 +92,12 @@ function App() {
   };
 
   return (
-    <div className="game">
-      <h1 className="title">Гра хрестики-нулики</h1>
+    <div style={gameContainerStyle}>
+      <h1 style={titleStyle}>Гра хрестики-нулики</h1>
 
       {/* Таймер партії */}
-      <div className="timer">
-        ⏱️ Час партії: <span>{formatTime(seconds)}</span>
+      <div style={timerStyle}>
+        ⏱️ Час партії: <span style={timerBadgeStyle}>{formatTime(seconds)}</span>
       </div>
 
       {/* Динамічний статус ходу / перемоги */}
@@ -73,7 +107,7 @@ function App() {
         currentPlayer={currentPlayer}
       />
 
-      {/* Ігрове поле з підсвіткою комбінації */}
+      {/* Ігрове поле з передачею підсвітки переможця */}
       <Board
         board={board}
         cellClick={handleCellClick}
