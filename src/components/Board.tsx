@@ -9,7 +9,7 @@ interface BoardProps {
 
 export function Board({ board, cellClick, winningLine }: BoardProps) {
   return (
-    <div className="board">
+    <div className="grid grid-cols-3 gap-2.5 w-[300px] mx-auto">
       {board.map((cell, index) => (
         <Cell
           key={index}

@@ -58,12 +58,17 @@ function App() {
   };
 
   return (
-    <div className="game">
-      <h1 className="title">Гра хрестики-нулики</h1>
+    <div className="text-center">
+      <h1 className="text-4xl font-extrabold uppercase tracking-wider mb-5 pb-2.5 bg-gradient-to-r from-slate-700 to-sky-500 bg-clip-text text-transparent drop-shadow-sm">
+        Гра хрестики-нулики
+      </h1>
 
       {/* Таймер партії */}
-      <div className="timer">
-        ⏱️ Час партії: <span>{formatTime(seconds)}</span>
+      <div className="mb-3.5 text-lg font-semibold text-slate-600">
+        ⏱️ Час партії:{" "}
+        <span className="font-mono text-xl text-slate-900 bg-slate-200 px-2.5 py-0.5 rounded-md ml-1.5 shadow-inner">
+          {formatTime(seconds)}
+        </span>
       </div>
 
       {/* Динамічний статус ходу / перемоги */}
