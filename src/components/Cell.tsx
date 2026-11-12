@@ -1,12 +1,22 @@
-import type { CellValue } from "../types"
+import type { CellValue } from "../types";
 
 interface CellProps {
   cell: CellValue;
   cellClick: () => void;
+  isWinner: boolean;
 }
 
-export function Cell({cell, cellClick}: CellProps) {
+export function Cell({ cell, cellClick, isWinner }: CellProps) {
+  // Формуємо рядок класів залежно від значення та перемоги
+  const cellClass = `
+    cell 
+    ${cell === "X" ? "x-mark" : cell === "O" ? "o-mark" : ""} 
+    ${isWinner ? "winner" : ""}
+  `.trim();
+
   return (
-    <div className="cell" onClick={cellClick}>{cell}</div>
-  )
+    <div className={cellClass} onClick={cellClick}>
+      {cell}
+    </div>
+  );
 }
