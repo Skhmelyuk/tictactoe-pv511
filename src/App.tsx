@@ -1,9 +1,44 @@
 import { useState, useEffect } from "react";
+import styled from "styled-components";
 import { Board } from "./components/Board";
 import { Button } from "./components/Button";
 import { Turn } from "./components/Turn";
 import type { BoardState, Player } from "./types";
 import { checkWinner } from "./utils";
+
+const GameContainer = styled.div`
+  text-align: center;
+`;
+
+const GameTitle = styled.h1`
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(45deg, #2c3e50, #3498db);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding-bottom: 10px;
+`;
+
+const TimerContainer = styled.div`
+  margin-bottom: 14px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #475569;
+`;
+
+const TimerBadge = styled.span`
+  font-family: monospace;
+  font-size: 1.2rem;
+  color: #0f172a;
+  background-color: #e2e8f0;
+  padding: 3px 10px;
+  border-radius: 6px;
+  margin-left: 6px;
+`;
 
 function App() {
   const [board, setBoard] = useState<BoardState>(Array(9).fill(null));
@@ -58,13 +93,13 @@ function App() {
   };
 
   return (
-    <div className="game">
-      <h1 className="title">Гра хрестики-нулики</h1>
+    <GameContainer>
+      <GameTitle>Гра хрестики-нулики</GameTitle>
 
       {/* Таймер партії */}
-      <div className="timer">
-        ⏱️ Час партії: <span>{formatTime(seconds)}</span>
-      </div>
+      <TimerContainer>
+        ⏱️ Час партії: <TimerBadge>{formatTime(seconds)}</TimerBadge>
+      </TimerContainer>
 
       {/* Динамічний статус ходу / перемоги */}
       <Turn
@@ -82,7 +117,7 @@ function App() {
 
       {/* Кнопка перезапуску */}
       <Button onResetGame={resetGame} />
-    </div>
+    </GameContainer>
   );
 }
 

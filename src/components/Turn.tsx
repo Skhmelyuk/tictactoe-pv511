@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import type { CellValue, Player } from "../types";
 
 interface TurnProps {
@@ -6,32 +7,48 @@ interface TurnProps {
   currentPlayer: Player;
 }
 
+const TurnContainer = styled.div`
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+  color: #34495e;
+  padding: 10px 20px;
+  background-color: #fff;
+  border-radius: 30px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  font-weight: 500;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+`;
+
+const PlayerMark = styled.span<{ $player: CellValue | Player }>`
+  color: ${({ $player }) => ($player === "X" ? "#e74c3c" : "#007bff")};
+  font-weight: 700;
+  text-shadow: ${({ $player }) =>
+    $player === "X"
+      ? "1px 1px 2px rgba(231, 76, 60, 0.2)"
+      : "1px 1px 2px rgba(0, 123, 255, 0.2)"};
+`;
+
 export function Turn({ winner, isDraw, currentPlayer }: TurnProps) {
-  // 1. Якщо є переможець
   if (winner) {
     return (
-      <div className="turn">
-        Гравець{" "}
-        <span className={winner === "X" ? "x-mark" : "o-mark"}>
-          {winner}
-        </span>{" "}
-        переміг! 🏆
-      </div>
+      <TurnContainer>
+        Гравець <PlayerMark $player={winner}>{winner}</PlayerMark> переміг! 🏆
+      </TurnContainer>
     );
   }
 
-  // 2. Якщо нічия
   if (isDraw) {
-    return <div className="turn">🤝 Нічия! Спробуйте ще раз.</div>;
+    return <TurnContainer>🤝 Нічия! Спробуйте ще раз.</TurnContainer>;
   }
 
-  // 3. Якщо гра триває
   return (
-    <div className="turn">
-      Хід гравця:{" "}
-      <span className={currentPlayer === "X" ? "x-mark" : "o-mark"}>
-        {currentPlayer}
-      </span>
-    </div>
+    <TurnContainer>
+      Хід гравця: <PlayerMark $player={currentPlayer}>{currentPlayer}</PlayerMark>
+    </TurnContainer>
   );
 }

@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import type { BoardState } from "../types";
 import { Cell } from "./Cell";
 
@@ -7,9 +8,17 @@ interface BoardProps {
   winningLine: number[] | null;
 }
 
+const BoardGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: 300px;
+  margin: 0 auto;
+`;
+
 export function Board({ board, cellClick, winningLine }: BoardProps) {
   return (
-    <div className="board">
+    <BoardGrid>
       {board.map((cell, index) => (
         <Cell
           key={index}
@@ -18,6 +27,6 @@ export function Board({ board, cellClick, winningLine }: BoardProps) {
           isWinner={winningLine?.includes(index) ?? false}
         />
       ))}
-    </div>
+    </BoardGrid>
   );
 }
